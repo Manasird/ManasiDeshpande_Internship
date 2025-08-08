@@ -7,12 +7,16 @@ public class Book {
     private int quantity;
     private int availableQuantity;
 
-    public Book( String name, String author, int quantity) {
-        //this.serialNo = serialNo;
+    public Book() {
+
+    }
+
+    public Book( int serialNo,String name, String author, int quantity) {
+        this.serialNo = serialNo;
         this.name = name;
         this.author = author;
         this.quantity = quantity;
-        //this.availableQuantity = availableQuantity;
+        this.availableQuantity = quantity;
     }
 
     public int getSerialNo() {
@@ -51,8 +55,8 @@ public class Book {
         return availableQuantity;
     }
 
-    public void setAvailableQuantity(int availableQuantity) {
-        this.availableQuantity = availableQuantity;
+    public void setAvailableQuantity(int quantity) {
+        this.availableQuantity = quantity;
     }
 
     @Override
