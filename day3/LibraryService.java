@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class LibraryService {
     private Map<String, Book> bookCatalog = new HashMap<>();
     int count =1;
-    Scanner sc = new Scanner(System.in);
+    public Scanner sc = new Scanner(System.in);
 
     //    public void addBook() {
 //        String name = null;

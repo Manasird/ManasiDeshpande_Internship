@@ -203,7 +203,7 @@ public class Library {
         }
     }
     public void update(){
-        int choice;
+        int choice = 0;
        // Book b =new Book();
         try{
 
@@ -222,70 +222,78 @@ public class Library {
                 if (updateauthor.isEmpty()) {
                     throw new CustomException("Author field can not be empty.");
                 }
+                else {
+                    b.setAuthor(updateauthor);
+                }
                 do{
                     System.out.println("1. Add number of copies.");
                     System.out.println("2. delete no of copies.");
                     System.out.println("3. Other");
                     String l=sc.next();
+                      try {
+                          choice = Integer.parseInt(l);
+                           if(choice<=0){
+                               System.out.println("Invalid number.Please Enter valid number.");
+                              // return;
+                           }
+                      }catch (NumberFormatException e){
+                          System.out.println("Invalid number.Please enter valid number.");
+                          continue;
+                      }
+                          switch (choice) {
+                              case 1:
+                                  System.out.println("Enter the number of copies.");
+                                  String j = sc.next();
+                                  int add;
+                                  try {
+                                      add = Integer.parseInt(j);
+                                      if (add <= 0) {
+                                          System.out.println("Invalid number. Please enter valid number");
+                                      }
+                                  } catch (NumberFormatException e) {
+                                      System.out.println("Invalid number. Please enter valid number");
+                                      return;
+                                  }
+                                  if (add > 0) {
+                                      b.setQuantity(b.getQuantity() + add);
+                                      b.setAvailableQuantity(b.getAvailableQuantity() + add);
+                                      System.out.println("Number of copies added Successfully.");
+                                  } else {
+                                      throw new CustomException("Please enter valid number.");
 
-                        choice = Integer.parseInt(l);
+                                  }
+                                  break;
+                              case 2:
+                                  System.out.println("Enter the number of copies.");
+                                  String k = sc.next();
+                                  int sub;
+                                  try {
+                                      sub = Integer.parseInt(k);
+                                      if (sub <= 0) {
+                                          System.out.println("Invalid number. Please enter valid number");
+                                      }
+                                  } catch (NumberFormatException e) {
+                                      System.out.println("Invalid number. Please enter valid number");
+                                      return;
+                                  }
+                                  if (sub > 0) {
+                                      if ((b.getQuantity() - sub) > 0) {
+                                          b.setQuantity(b.getQuantity() - sub);
+                                          b.setAvailableQuantity(b.getAvailableQuantity() - sub);
+                                          System.out.println("Number of copies deleted Successfully.");
+                                      } else {
+                                          System.out.println("You are trying to delete copies more than available");
+                                      }
+                                  } else {
+                                      throw new CustomException("Please enter valid number.");
 
-                     switch (choice){
-                         case 1:
-                             System.out.println("Enter the number of copies.");
-                             String j= sc.next();
-                             int add;
-                             try {
-                                 add = Integer.parseInt(j);
-                                 if (add <= 0) {
-                                     System.out.println("Invalid number. Please enter valid number");
-                                 }
-                             } catch (NumberFormatException e) {
-                                 System.out.println("Invalid number. Please enter valid number");
-                                 return;
-                             }
-                             if(add>0){
-                                b.setQuantity(b.getQuantity()+add);
-                                b.setAvailableQuantity(b.getAvailableQuantity()+add);
-                                System.out.println("Number of copies added Successfully.");
-                             }
-                             else {
-                                 throw new CustomException("Please enter valid number.");
+                                  }
+                                  break;
+                              default: {
+                                  System.out.println("Invalid input.please enter valid input.");
+                              }
+                          }
 
-                             }
-                             break;
-                         case 2:
-                             System.out.println("Enter the number of copies.");
-                             String k= sc.next();
-                             int sub;
-                             try {
-                                 sub = Integer.parseInt(k);
-                                 if (sub <= 0) {
-                                     System.out.println("Invalid number. Please enter valid number");
-                                 }
-                             } catch (NumberFormatException e) {
-                                 System.out.println("Invalid number. Please enter valid number");
-                                 return;
-                             }
-                             if(sub>0 ){
-                                 if((b.getQuantity()-sub)>0) {
-                                     b.setQuantity(b.getQuantity() - sub);
-                                     b.setAvailableQuantity(b.getAvailableQuantity()-sub);
-                                     System.out.println("Number of copies deleted Successfully.");
-                                 }
-                                 else {
-                                     System.out.println("You are trying to delete copies more than available");
-                                 }
-                             }
-                             else {
-                                 throw new CustomException("Please enter valid number.");
-
-                             }
-                             break;
-                         default:{
-                             System.out.println("Invalid input.please enter valid input.");
-                         }
-                     }
                 }while(choice!=3);
 
             }
@@ -321,7 +329,8 @@ public class Library {
         public static void main(String[] args) throws Exception {
             Library l= new Library();
             Scanner sc= new Scanner(System.in);
-            int choice ;
+            int choice=0;
+
             do {
                 System.out.println("1. Add Book");
                 System.out.println("2. Display catalog.");
@@ -333,7 +342,19 @@ public class Library {
                 System.out.println("8. Search book by name.");
                 System.out.println("9. Exit.");
                 System.out.println("Please enter your choice.");
-                choice= sc.nextInt();
+
+                String m= sc.next();
+                try {
+                     choice=Integer.parseInt(m) ;
+                    if(choice<=0){
+                        System.out.println("Invalid number.Please Enter valid number.");
+                        // return;
+                    }
+                }catch (NumberFormatException e){
+                    System.out.println("Invalid number.Please enter valid number.");
+                    continue;
+                }
+
                 switch(choice){
                     case 1:
                         l.addBook();
